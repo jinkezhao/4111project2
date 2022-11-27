@@ -8,7 +8,7 @@ with outdegree as(
     limit 1
 ),
 indegree as(
-    select g.dst as dst
+    select g.dst as dst 
     from dbt_jzhao.q3 as g 
     group by g.dst 
     order by count(*) DESC 

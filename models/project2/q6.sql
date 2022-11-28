@@ -28,7 +28,9 @@ count2 as(
 	from node
 	where node.A > node.B and node.B > node.C and node.C < node.A 
 )
+
 select count1.c1+count2.c2 as no_of_triangles
 from count1,count2
+
 
 

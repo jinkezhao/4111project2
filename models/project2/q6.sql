@@ -2,7 +2,7 @@
 
 with C as(
     select dst as dst, src as src 
-    from dbt_jzhao.q3 
+    from  dbt_jzhao.q3
 ),
 B as(
     select dst as dst, src as src 
@@ -10,11 +10,25 @@ B as(
 ), 
 A as(
     select dst as dst, src as src 
-    from dbt_jzhao.q3 
+    from dbt_jzhao.q3
+),
+node as(
+    select distinct A.dst as A, B.dst as B, C.dst as C
+	from A,B,C
+	where A.dst = B.src and B.dst = C.src and C.dst = A.src 
+  
+),
+count1 as( 
+	select count(*) as c1
+	from node
+	where node.A < node.B and node.B < node.C and node.C > node.A 
+),
+count2 as( 
+	select count(*) as c2
+	from node
+	where node.A > node.B and node.B > node.C and node.C < node.A 
 )
-
-select count(*) as no_of_triangles
-from A,B,C
-where A.dst = B.src and B.dst = C.src and C.dst = A.src and A.dst != B.dst and A.src != B.src and A.dst != C.dst and A.src != C.src
+select count1.c1+count2.c2 as no_of_triangles
+from count1,count2
 
 

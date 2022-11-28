@@ -7,7 +7,7 @@ with tmp as(
 )
 
 
-SELECT  tmp.month ,tmp.year,count(*) as count
+SELECT  CAST(tmp.month as INT64) ,tmp.year,count(*) as count
 FROM tmp
 group by tmp.month, tmp.year
 order by count(*) DESC 

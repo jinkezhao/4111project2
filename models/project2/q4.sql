@@ -1,7 +1,5 @@
 {{ config(materialized='table') }}
 
-<<<<<<< HEAD
-=======
 with outdegree as(
     select g.src as src
     from dbt_jzhao.q3 as g 
@@ -20,6 +18,5 @@ indegree as(
 select indegree.dst as max_indegree, outdegree.src as max_outdegree
 from outdegree,indegree
 
->>>>>>> 4c114b6122a7e0b4e2b45e56adeca764fe21e3d9
 
 
